@@ -27,9 +27,9 @@ This project allowing to lock ether for a certain time via a graphical interface
 
 #### Installation
 
-1. First, install dependencies:
+1. First, go to the folder:
     ```bash
-    cd blockchain && npm install 
+    cd blockchain
     ```
 
 ##### With truffle
@@ -41,7 +41,9 @@ Run the local Truffle blockchain:
 
 * In Truffle development console execute this command to compile the contracts: `compile`
 * Then migrate them on the local blockchain:
-`migrate`
+    ```bash
+    migrate
+    ```
 
 ##### With ganache
 
