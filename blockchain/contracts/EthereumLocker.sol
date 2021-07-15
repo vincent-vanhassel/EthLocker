@@ -2,8 +2,7 @@ pragma solidity ^0.7.6;
 
 contract ethereumLocker {
 
-    event LockAdded(address, uint256 expire, uint256 amount);
-    event Withdraw(address, uint256 amount, uint256 timer);
+    event LockAdded(uint256 expire, uint256 amount);
 
     struct locked{
         uint256 expire;
@@ -17,7 +16,7 @@ contract ethereumLocker {
         locked storage userInfo = users[msg.sender];
         userInfo.expire = block.timestamp + lockTime * 1 days;
         userInfo.amount = msg.value;
-        emit LockAdded(msg.sender, userInfo.expire, userInfo.amount);
+        emit LockAdded(userInfo.expire, userInfo.amount);
     }
 
     function withdraw() public {
@@ -27,6 +26,5 @@ contract ethereumLocker {
         userInfo.expire = 0;
         userInfo.amount = 0;
         msg.sender.transfer(value);
-        emit Withdraw(msg.sender, userInfo.amount, (userInfo.expire-block.timestamp));
     }
 }
