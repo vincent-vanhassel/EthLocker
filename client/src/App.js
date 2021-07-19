@@ -4,7 +4,7 @@ import Web3 from 'web3';
 import { ethereumLockerABI } from './abi/abis';
 
 const web3 = new Web3(Web3.givenProvider);
-const contractAddresse = '0x568087fE1524b1B3A17e1D2D485D82e4249D1512';
+const contractAddresse = '0x8991941d5d65d7FA925aFd5d39ddB444db4ce458';
 const contract = new web3.eth.Contract(ethereumLockerABI, contractAddresse);
 
 function App() {
@@ -16,8 +16,7 @@ function App() {
     const accounts = await window.ethereum.enable();
     const account = accounts[0];
     const gas = await contract.methods.lockEther(timeValue).estimateGas();
-    console.log(gas)
-    const result = await contract.methods.lockEther(timeValue).send({ from: account, gas: '25000' });
+    const result = await contract.methods.lockEther(timeValue).send({ from: account, gas: gas, value: etherValue });
     console.log(result);
   }
 

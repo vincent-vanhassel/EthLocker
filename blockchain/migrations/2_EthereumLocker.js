@@ -1,4 +1,4 @@
-const EthereumLocker = artifacts.require('EthereumLocker');
+const EthereumLocker = artifacts.require('ethereumLocker');
 
 module.exports = function (deployer) {
     deployer.deploy(EthereumLocker);
