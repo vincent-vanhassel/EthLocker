@@ -1,4 +1,4 @@
-pragma solidity ^0.7.6;
+pragma solidity ^0.8.6;
 
 contract ethereumLocker {
 
@@ -19,12 +19,12 @@ contract ethereumLocker {
         emit LockAdded(userInfo.expire, userInfo.amount);
     }
 
-    function withdraw() public {
+    function withdraw() public payable {
         require(block.timestamp >= users[msg.sender].expire);
         locked storage userInfo = users[msg.sender];
         uint256 value = userInfo.amount;
         userInfo.expire = 0;
         userInfo.amount = 0;
-        msg.sender.transfer(value);
+        payable(msg.sender).transfer(value);
     }
 }

@@ -4,7 +4,7 @@ import Web3 from 'web3';
 import { ethereumLockerABI } from './abi/abis';
 
 const web3 = new Web3(Web3.givenProvider);
-const contractAddresse = '0x8991941d5d65d7FA925aFd5d39ddB444db4ce458';
+const contractAddresse = '0x86fC67Ab3d823c323fdCdB03b6e98B062F548595';
 const contract = new web3.eth.Contract(ethereumLockerABI, contractAddresse);
 
 function App() {
@@ -15,6 +15,7 @@ function App() {
     e.preventDefault();
     const accounts = await window.ethereum.enable();
     const account = accounts[0];
+    console.log(account);
     const gas = await contract.methods.lockEther(timeValue).estimateGas();
     const result = await contract.methods.lockEther(timeValue).send({ from: account, gas: gas, value: etherValue });
     console.log(result);
@@ -32,13 +33,13 @@ function App() {
   return (
     <div className="App">
 
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossOrigin="anonymous"/>
 
       <header className="App-header">
         <title>Locker</title>
       </header>
 
-      <body>
+      <div>
         <div className="my-4 text-center">
           <h1>Ethereum locker</h1>
         </div>
@@ -76,7 +77,7 @@ function App() {
             </div>
           </div>
         </div>
-      </body>
+      </div>
 
     </div>
   );
