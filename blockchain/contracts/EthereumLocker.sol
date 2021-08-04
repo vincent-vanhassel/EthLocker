@@ -14,13 +14,13 @@ contract ethereumLocker {
     function lockEther(uint256 lockTime) public payable {
         require(msg.value > 0);
         locked storage userInfo = users[msg.sender];
-        userInfo.expire = block.timestamp + lockTime * 1 days;
+        userInfo.expire = block.number + lockTime;
         userInfo.amount = msg.value;
         emit LockAdded(userInfo.expire, userInfo.amount);
     }
 
     function withdraw() public payable {
-        require(block.timestamp >= users[msg.sender].expire);
+        require(block.number >= users[msg.sender].expire);
         locked storage userInfo = users[msg.sender];
         uint256 value = userInfo.amount;
         userInfo.expire = 0;
